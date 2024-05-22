@@ -1,12 +1,12 @@
 Name:           lorax-templates-rhel
-Version:        8.7
+Version:        8.10
 Release:        1%{?dist}
 Summary:        RHEL8 build templates for lorax and livemedia-creator
 
 License:        GPLv2+
 URL:            https://github.com/weldr/lorax
 BuildArch:      noarch
-Source0:        lorax-templates-rhel-8.7-1.tar.gz
+Source0:        lorax-templates-rhel-8.10-1.tar.gz
 
 # Required for the template branding support
 Requires:       lorax > 28.14.68
@@ -34,6 +34,16 @@ cp -a 80-rhel/* $RPM_BUILD_ROOT/%{templatedir}
 %{templatedir}/*
 
 %changelog
+* Wed Feb 07 2024 Brian C. Lane <bcl@redhat.com> - 8.10-1
+- Makefile: Bump the release version to 8.10 (bcl)
+  Related: RHEL-24418
+- Restore missing ppc files (bcl)
+  Resolves: RHEL-24619
+
+* Tue Feb 06 2024 Brian C. Lane <bcl@redhat.com> - 8.7-2
+- templates: Remove libreport bugzilla plugins
+  Resolves: RHEL-24418
+
 * Mon Jun 13 2022 Brian C. Lane <bcl@redhat.com> - 8.7-1
 - runtime-cleanup: Use new lorax branding support (bcl)
   Resolves: rhbz#2052154
