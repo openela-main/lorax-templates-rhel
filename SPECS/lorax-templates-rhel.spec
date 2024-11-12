@@ -1,12 +1,12 @@
 Name:           lorax-templates-rhel
 Version:        9.0
-Release:        39%{?dist}
+Release:        40%{?dist}
 Summary:        RHEL8 build templates for lorax and livemedia-creator
 
 License:        GPLv2+
 URL:            https://github.com/weldr/lorax
 BuildArch:      noarch
-Source0:        lorax-templates-rhel-9.0-39.tar.gz
+Source0:        lorax-templates-rhel-9.0-40.tar.gz
 
 # Required for the template branding support
 Requires:       lorax >= 34.9.1
@@ -34,6 +34,10 @@ cp -a 80-rhel/* $RPM_BUILD_ROOT/%{templatedir}
 %{templatedir}/*
 
 %changelog
+* Tue Jul 09 2024 Brian C. Lane <bcl@redhat.com> - 9.0-40
+- rsyslog.conf: Update to use current config syntax (bcl)
+  Resolves: RHEL-28654
+
 * Tue Feb 06 2024 Brian C. Lane <bcl@redhat.com> - 9.0-39
 - templates: Remove libreport bugzilla plugins (bcl)
   Resolves: RHEL-24421
