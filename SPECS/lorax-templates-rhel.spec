@@ -1,12 +1,12 @@
 Name:           lorax-templates-rhel
-Version:        9.0
-Release:        40%{?dist}
-Summary:        RHEL8 build templates for lorax and livemedia-creator
+Version:        9.6
+Release:        2%{?dist}
+Summary:        RHEL9 build templates for lorax and livemedia-creator
 
 License:        GPLv2+
 URL:            https://github.com/weldr/lorax
 BuildArch:      noarch
-Source0:        lorax-templates-rhel-9.0-40.tar.gz
+Source0:        lorax-templates-rhel-9.6-2.tar.gz
 
 # Required for the template branding support
 Requires:       lorax >= 34.9.1
@@ -34,6 +34,16 @@ cp -a 80-rhel/* $RPM_BUILD_ROOT/%{templatedir}
 %{templatedir}/*
 
 %changelog
+* Tue Feb 18 2025 Brian C. Lane <bcl@redhat.com> - 9.6-2
+- runtime-cleanup: Leave stat binary and openssl files (bcl)
+  Resolves: RHEL-79950
+
+* Tue Nov 26 2024 Brian C. Lane <bcl@redhat.com> - 9.6-1
+- Bump release version to 9.6 (bcl)
+  Related: RHEL-69011
+- runtime-cleanup: Newer glibc installs /usr/sbin/ldconfig (bcl)
+  Resolves: RHEL-69011
+
 * Tue Jul 09 2024 Brian C. Lane <bcl@redhat.com> - 9.0-40
 - rsyslog.conf: Update to use current config syntax (bcl)
   Resolves: RHEL-28654
