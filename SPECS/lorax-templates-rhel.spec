@@ -1,12 +1,12 @@
 Name:           lorax-templates-rhel
-Version:        9.6
-Release:        2%{?dist}
+Version:        9.7
+Release:        3%{?dist}
 Summary:        RHEL9 build templates for lorax and livemedia-creator
 
 License:        GPLv2+
 URL:            https://github.com/weldr/lorax
 BuildArch:      noarch
-Source0:        lorax-templates-rhel-9.6-2.tar.gz
+Source0:        lorax-templates-rhel-9.7-3.tar.gz
 
 # Required for the template branding support
 Requires:       lorax >= 34.9.1
@@ -34,6 +34,26 @@ cp -a 80-rhel/* $RPM_BUILD_ROOT/%{templatedir}
 %{templatedir}/*
 
 %changelog
+* Mon Aug 11 2025 Brian C. Lane <bcl@redhat.com> - 9.7-3
+- live-install.tmpl: Fix broken single item tuple (bcl)
+  Related: RHEL-108149
+- libvirt.tmpl: Fix use of xrange (bcl)
+  Related: RHEL-108149
+- 80-rhel: Remove unused templates and config files (bcl)
+  Resolves: RHEL-108149
+- Fix tzselect path in runtime-cleanup.tmpl (jikortus)
+  Resolves: RHEL-101453
+
+* Tue May 27 2025 Brian C. Lane <bcl@redhat.com> - 9.7-2
+- Set ppc64le default boot to test the media (bcl)
+  Resolves: RHEL-93170
+
+* Mon May 19 2025 Brian C. Lane <bcl@redhat.com> - 9.7-1
+- Bump release version to 9.7 (bcl)
+  Related: RHEL-91930
+- Add a boot menu for fips=1 (bcl)
+  Resolves: RHEL-91930
+
 * Tue Feb 18 2025 Brian C. Lane <bcl@redhat.com> - 9.6-2
 - runtime-cleanup: Leave stat binary and openssl files (bcl)
   Resolves: RHEL-79950
