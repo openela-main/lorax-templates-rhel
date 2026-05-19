@@ -1,6 +1,6 @@
 Name:           lorax-templates-rhel
-Version:        10.1
-Release:        3%{?dist}
+Version:        10.2
+Release:        1%{?dist}
 Summary:        RHEL build templates for lorax and livemedia-creator
 
 License:        GPLv2+
@@ -10,7 +10,7 @@ BuildArch:      noarch
 # This tarball is generated from the contents of this dist-git repository
 # by running the command `make tar`.
 # See README for full details of how to update this package
-Source0:        lorax-templates-rhel-10.1-3.tar.gz
+Source0:        lorax-templates-rhel-10.2-1.tar.gz
 
 # Required for the template branding support
 Requires:       lorax >= 34.9.1
@@ -40,6 +40,12 @@ cp -a 80-rhel/* $RPM_BUILD_ROOT/%{templatedir}
 %{templatedir}/*
 
 %changelog
+* Thu Nov 06 2025 Brian C. Lane <bcl@redhat.com> - 10.2-1
+- Do not remove SELinux from the runtime (ppolawsk)
+  Resolves: RHEL-126547
+- Bump release version to 10.2 (bcl)
+  Related: RHEL-126547
+
 * Thu Jul 10 2025 Brian C. Lane <bcl@redhat.com> - 10.1-3
 - config_files: Do not remove `chcon` in runtime cleanup (ppolawsk)
   Resolves: RHEL-102872
