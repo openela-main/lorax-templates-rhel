@@ -1,6 +1,6 @@
 Name:           lorax-templates-rhel
-Version:        10.2
-Release:        1%{?dist}
+Version:        10.3
+Release:        4%{?dist}
 Summary:        RHEL build templates for lorax and livemedia-creator
 
 License:        GPLv2+
@@ -10,7 +10,7 @@ BuildArch:      noarch
 # This tarball is generated from the contents of this dist-git repository
 # by running the command `make tar`.
 # See README for full details of how to update this package
-Source0:        lorax-templates-rhel-10.2-1.tar.gz
+Source0:        lorax-templates-rhel-10.3-4.tar.gz
 
 # Required for the template branding support
 Requires:       lorax >= 34.9.1
@@ -18,11 +18,11 @@ Requires:       lorax >= 34.9.1
 Provides: lorax-templates = %{version}-%{release}
 
 # Where are these supposed to end up?
-%define templatedir %{_datadir}/lorax/templates.d/80-rhel
+%define templatedir %{_datadir}/lorax/templates.d/
 
 %description
 RHEL-specific Lorax templates for creating the boot.iso and live isos are
-placed in %{templatedir}
+placed in %{templatedir}/80-rhel
 
 %prep
 %setup
@@ -33,13 +33,47 @@ placed in %{templatedir}
 %install
 rm -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT/%{templatedir}
-cp -a 80-rhel/* $RPM_BUILD_ROOT/%{templatedir}
+cp -a 80-rhel $RPM_BUILD_ROOT/%{templatedir}
+cp -a 70-64k $RPM_BUILD_ROOT/%{templatedir}
 
 %files
 %dir %{templatedir}
-%{templatedir}/*
+%dir %{templatedir}/80-rhel
+%{templatedir}/80-rhel/*
+
+%package 64k
+Summary:        RHEL build templates for lorax and livemedia-creator using the aarch64 64k kernel
+# lorax version with 64k kernel flavor support
+Requires:       lorax >= 40.5.16
+
+%description 64k
+Lorax templates that install kernel-64k on aarch64. All other arches are identical to
+lorax-templates-rhel. Templates are placed in %{templatedir}/70-64k
+
+%files 64k
+%dir %{templatedir}
+%dir %{templatedir}/70-64k
+%{templatedir}/70-64k/*
 
 %changelog
+* Fri Aug 21 2026 Brian C. Lane <bcl@redhat.com> - 10.3-4
+- runtime-cleanup: Keep the cec driver (bcl)
+  Resolves: RHEL-245277
+
+* út srp 04 2026 Jan Stodola <jstodola@redhat.com> - 10.3-3
+- Keep the fb kernel module (jstodola)
+  Resolves: RHEL-224409
+
+* Mon Jun 29 2026 Brian C. Lane <bcl@redhat.com> - 10.3-2
+- spec: Add ownership of the 80-rhel and 70-64k directories (bcl)
+  Related: RHEL-163726
+
+* Wed Apr 15 2026 Brian C. Lane <bcl@redhat.com> - 10.3-1
+- Bump release version to 10.3 (bcl)
+  Related: RHEL-163726
+- Add templates and subpackage for 64k flavor aarch64 kernel (bcl)
+  Resolves: RHEL-163726
+
 * Thu Nov 06 2025 Brian C. Lane <bcl@redhat.com> - 10.2-1
 - Do not remove SELinux from the runtime (ppolawsk)
   Resolves: RHEL-126547
